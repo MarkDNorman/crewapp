@@ -1,12 +1,32 @@
 import api from './api';
 
+// Helper to safely access localStorage
+const safeLocalStorage = {
+  getItem(key) {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem(key);
+    }
+    return null;
+  },
+  setItem(key, value) {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem(key, value);
+    }
+  },
+  removeItem(key) {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem(key);
+    }
+  },
+};
+
 export const authService = {
   async login(email, password) {
     const response = await api.post('/auth/login', { email, password });
     const { access_token, user } = response.data;
 
-    localStorage.setItem('authToken', access_token);
-    localStorage.setItem('user', JSON.stringify(user));
+    safeLocalStorage.setItem('authToken', access_token);
+    safeLocalStorage.setItem('user', JSON.stringify(user));
 
     return { token: access_token, user };
   },
@@ -20,23 +40,23 @@ export const authService = {
     });
     const { access_token, user } = response.data;
 
-    localStorage.setItem('authToken', access_token);
-    localStorage.setItem('user', JSON.stringify(user));
+    safeLocalStorage.setItem('authToken', access_token);
+    safeLocalStorage.setItem('user', JSON.stringify(user));
 
     return { token: access_token, user };
   },
 
   logout() {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
+    safeLocalStorage.removeItem('authToken');
+    safeLocalStorage.removeItem('user');
   },
 
   getCurrentUser() {
-    const userStr = localStorage.getItem('user');
+    const userStr = safeLocalStorage.getItem('user');
     return userStr ? JSON.parse(userStr) : null;
   },
 
   getToken() {
-    return localStorage.getItem('authToken');
+    return safeLocalStorage.getItem('authToken');
   },
 };
