@@ -6,7 +6,7 @@ FastAPI-based REST API for CrewLayover application.
 
 - RESTful API with automatic OpenAPI documentation
 - JWT-based authentication
-- PostgreSQL database with SQLAlchemy ORM
+- SQLite database (default) or PostgreSQL with SQLAlchemy ORM
 - Role-based access control (crew, moderator, admin)
 - Weather API integration (OpenWeather)
 - Content moderation system
@@ -30,11 +30,21 @@ backend/
 └── seed_data.py        # Database seeding script
 ```
 
-## Setup
+## Quick Setup (Recommended)
+
+**Option 1: Automated Install Script**
+```bash
+chmod +x install.sh
+./install.sh
+source venv/bin/activate
+python run.py
+```
+
+**Option 2: Manual Setup**
 
 1. Create virtual environment:
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
@@ -46,7 +56,8 @@ pip install -r requirements.txt
 3. Configure environment:
 ```bash
 cp .env.example .env
-# Edit .env with your settings
+# Default uses SQLite - works immediately!
+# Edit .env to customize settings or add weather API key
 ```
 
 4. Run the server:
@@ -55,6 +66,27 @@ python run.py
 ```
 
 The API will be available at `http://localhost:8000`
+
+## Database Options
+
+### SQLite (Default - Recommended for Development)
+- ✅ **No setup required** - works out of the box
+- ✅ Already configured in `.env.example`
+- ✅ Great for development and testing
+- Database file: `crewlayover.db` (created automatically)
+
+### PostgreSQL (Optional - Recommended for Production)
+1. Install PostgreSQL on your system
+2. Install PostgreSQL dependencies:
+```bash
+pip install -r requirements-postgres.txt
+```
+3. Update `.env`:
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/crewlayover
+```
+
+See `POSTGRESQL_SETUP.md` for detailed PostgreSQL installation instructions.
 
 ## API Documentation
 
@@ -84,17 +116,28 @@ pytest
 
 ## Environment Variables
 
-Required variables in `.env`:
+Default configuration in `.env`:
 
 ```env
-DATABASE_URL=postgresql://user:password@localhost:5432/crewlayover
+# Database (SQLite by default)
+DATABASE_URL=sqlite:///./crewlayover.db
+
+# For PostgreSQL, uncomment and configure:
+# DATABASE_URL=postgresql://user:password@localhost:5432/crewlayover
+
+# Security
 SECRET_KEY=your-secret-key-here
 ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=10080
+
+# External APIs (optional)
 WEATHER_API_KEY=your-openweather-api-key
-REDIS_URL=redis://localhost:6379
+
+# Environment
 ENVIRONMENT=development
 ```
+
+**Note:** The app works immediately with SQLite. Weather API key is optional but recommended.
 
 ## User Roles
 

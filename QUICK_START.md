@@ -1,26 +1,25 @@
 # CrewLayover - Quick Start Guide
 
-Get up and running in 5 minutes!
+Get up and running in 3 minutes! (No database setup required)
 
 ## Prerequisites
 
 - Python 3.9+
 - Node.js 18+
-- PostgreSQL 14+
 
-## 1. Database Setup (2 minutes)
-
-```bash
-# Create database
-psql postgres -c "CREATE USER crewlayover WITH PASSWORD 'crewlayover';"
-psql postgres -c "CREATE DATABASE crewlayover OWNER crewlayover;"
-```
-
-## 2. Backend Setup (1 minute)
+## 1. Backend Setup (1 minute)
 
 ```bash
 cd backend
-python -m venv venv
+./install.sh  # Automated setup script
+source venv/bin/activate
+python run.py
+```
+
+**Or manually:**
+```bash
+cd backend
+python3 -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env
@@ -28,8 +27,9 @@ python run.py
 ```
 
 Backend running at: http://localhost:8000
+✅ Uses SQLite - no database setup needed!
 
-## 3. Seed Data (30 seconds)
+## 2. Seed Data (30 seconds)
 
 ```bash
 # In new terminal
@@ -38,7 +38,7 @@ source venv/bin/activate
 python seed_data.py
 ```
 
-## 4. Mobile App (1 minute)
+## 3. Mobile App (1 minute)
 
 ```bash
 # In new terminal
@@ -49,7 +49,7 @@ npm start
 
 Press `w` for web browser or scan QR code with Expo Go app.
 
-## 5. Admin Panel (1 minute)
+## 4. Admin Panel (1 minute)
 
 ```bash
 # In new terminal
@@ -79,21 +79,22 @@ Open: http://localhost:3000
 
 ## Troubleshooting
 
-**Database connection error?**
-```bash
-# Check PostgreSQL is running
-psql postgres -c "SELECT version();"
-```
-
 **Backend won't start?**
 ```bash
-# Check .env file exists
+# Verify .env file exists
 cat backend/.env
+
+# Check dependencies are installed
+pip list | grep fastapi
 ```
 
 **Mobile app can't connect?**
 - Ensure backend is running on port 8000
 - Check `frontend/src/constants/config.js`
+
+**Want to use PostgreSQL instead?**
+- See `POSTGRESQL_SETUP.md` for detailed instructions
+- Install with: `pip install -r requirements-postgres.txt`
 
 ## What's Next?
 

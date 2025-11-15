@@ -1,0 +1,11 @@
+# PostgreSQL-specific dependencies
+# Install with: pip install -r requirements-postgres.txt
+
+# Install base requirements first
+-r requirements.txt
+
+# PostgreSQL driver
+psycopg2-binary>=2.9.11
+
+# Optional: Redis for caching
+redis>=5.0.1
