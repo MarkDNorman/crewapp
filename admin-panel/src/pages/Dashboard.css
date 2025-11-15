@@ -1,0 +1,151 @@
+.dashboard {
+  min-height: 100vh;
+  background: #F9FAFB;
+}
+
+.dashboard-header {
+  background: white;
+  padding: 20px 40px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-header h1 {
+  color: #1E40AF;
+  margin: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info button {
+  background: #EF4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.dashboard-content {
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-content h2 {
+  color: #1F2937;
+  margin-bottom: 20px;
+}
+
+.loading,
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6B7280;
+  font-size: 18px;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.tip-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #E5E7EB;
+}
+
+.tip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.tip-id {
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.tip-status {
+  background: #FEF3C7;
+  color: #92400E;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tip-card h3 {
+  color: #1F2937;
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.tip-content {
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.tip-category {
+  display: inline-block;
+  background: #DBEAFE;
+  color: #1E40AF;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.tip-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 13px;
+  color: #6B7280;
+  margin-bottom: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.tip-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.tip-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.approve-btn {
+  background: #10B981;
+  color: white;
+}
+
+.reject-btn {
+  background: #EF4444;
+  color: white;
+}
+
+.tip-actions button:hover {
+  opacity: 0.9;
+}

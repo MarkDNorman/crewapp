@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: crewlayover-db
+    environment:
+      POSTGRES_DB: crewlayover
+      POSTGRES_USER: crewlayover
+      POSTGRES_PASSWORD: crewlayover
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crewlayover"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: crewlayover-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: crewlayover-api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://crewlayover:crewlayover@postgres:5432/crewlayover
+      SECRET_KEY: ${SECRET_KEY:-your-secret-key-change-in-production}
+      WEATHER_API_KEY: ${WEATHER_API_KEY}
+      REDIS_URL: redis://redis:6379
+      ENVIRONMENT: development
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  admin-panel:
+    build:
+      context: ./admin-panel
+      dockerfile: Dockerfile
+    container_name: crewlayover-admin
+    ports:
+      - "3000:3000"
+    environment:
+      REACT_APP_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+    volumes:
+      - ./admin-panel:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
