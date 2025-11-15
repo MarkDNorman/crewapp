@@ -1,0 +1,121 @@
+/* Destinations List */
+.destinations-page {
+  padding: 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 30px;
+}
+
+.page-header h1 {
+  font-size: 32px;
+  color: #1F2937;
+  margin-bottom: 10px;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 15px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #1E40AF;
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.destination-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.destination-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.destination-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.destination-content {
+  padding: 20px;
+}
+
+.destination-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 5px;
+}
+
+.destination-country {
+  font-size: 16px;
+  color: #6B7280;
+  margin-bottom: 5px;
+}
+
+.destination-region {
+  font-size: 14px;
+  color: #9CA3AF;
+}
+
+/* Map View */
+.map-container {
+  height: calc(100vh - 70px);
+  width: 100%;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.map-popup {
+  text-align: center;
+}
+
+.map-popup h3 {
+  margin-bottom: 5px;
+  color: #1F2937;
+}
+
+.map-popup p {
+  color: #6B7280;
+  margin-bottom: 10px;
+}
+
+.map-popup button {
+  background: #1E40AF;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.map-popup button:hover {
+  background: #1E3A8A;
+}

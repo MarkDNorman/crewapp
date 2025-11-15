@@ -28,6 +28,7 @@ CrewLayover provides effortlessly actionable recommendations, hyper-relevant log
 ```
 crewapp/
 ├── backend/          # FastAPI backend
+├── web-app/          # React web app (for desktop/laptop)
 ├── frontend/         # React Native mobile app (Expo)
 ├── admin-panel/      # React web admin panel
 └── docs/            # Documentation
@@ -95,7 +96,21 @@ npm start
 # - Scan QR code with Expo Go app on physical device
 ```
 
-### 4. Admin Panel Setup
+### 4. Web App Setup (Recommended for Desktop)
+
+```bash
+cd web-app
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+```
+
+Web app will be available at `http://localhost:3001`
+
+### 5. Admin Panel Setup
 
 ```bash
 cd admin-panel
